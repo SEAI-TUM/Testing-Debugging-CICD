@@ -111,10 +111,6 @@ and an implementation that *almost* matches it.
 Use the minimal failing example from Exercise 2 as your reproduction. Walk the
 loop: **observe → hypothesize → predict → experiment → fix.**
 
-```bash
-pytest tests/test_rle.py::test_roundtrip -x --pdb
-```
-
 Trace the *infection chain* backwards from the failure to the defect, fix
 `decode`, then re-run Exercise 2
 
