@@ -28,12 +28,4 @@ def test_rle_small_example():
 # characters, so a naive st.text() strategy would miss this bug entirely.
 # A property test is only as good as the inputs it samples -- so we feed it
 # runs of a single repeated character, with the length chosen by Hypothesis.
-#
-# from hypothesis import given, strategies as st
-#
-# # A string of one repeated character, length 0..20.
-# run = st.integers(min_value=0, max_value=20).map(lambda n: "a" * n)
-#
-# @given(run)
-# def test_roundtrip(s):
-#     assert decode(encode(s)) == s
+
