@@ -1,0 +1,8 @@
+[tool.pytest.ini_options]
+# Lets `from src.cart import ...` resolve from the repo root.
+pythonpath = ["."]
+testpaths = ["tests"]
+addopts = "-q"
+
+[tool.coverage.run]
+source = ["src"]
