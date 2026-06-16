@@ -81,21 +81,17 @@ to a run of 10 identical chars, i.e. `"aaaaaaaaaa"`):
 pytest tests/test_rle.py::test_roundtrip -v
 ```
 
-**Talking point:** *the property is the oracle* — and a property test is only
-as good as the inputs it samples.
-
 ---
 
 ## Exercise 3 — Generate tests with AI, then own the oracle (~15 min)
 
 **File:** `tests/test_pricing_ai.py` · **Target:** `src/pricing_ai.py`
 
-This is the AI-coding heart of the session. `final_price` carries a **spec in
-its docstring** (10 or more units → 10 % discount) and an implementation that
-*almost* matches it.
+`final_price` carries a **spec in its docstring** (10 or more units → 10 % discount)
+and an implementation that *almost* matches it.
 
 1. **Generate.** Use your AI assistant (Copilot, Cursor, Claude, ChatGPT, …)
-   to write a pytest suite for `final_price`. Paste it into the test file.
+   to write a pytest suite for `final_price`.
 2. **Run.** `pytest tests/test_pricing_ai.py -v` — the AI tests pass, and
    `pytest --cov=src.pricing_ai` likely shows 100 % coverage.
 3. **Check the oracle.** Read the spec. Add one test for the boundary
@@ -106,15 +102,6 @@ its docstring** (10 or more units → 10 % discount) and an implementation that
    def test_boundary_10_units_gets_discount():
        assert final_price(100.0, 10) == 900.0   # SPEC: 10+ units -> 10 % off
    ```
-
-   It **fails** (`1000.0 != 900.0`): the code uses `> 10`, the spec says
-   `>= 10`. Fix the code to `quantity >= 10` and it passes.
-
-**Talking point:** an AI generates tests in seconds, but it tends to assert
-what the code *does*, not what it *should* do. If the code is buggy, the
-generated tests lock the bug in as "correct." Coverage was 100 % the whole
-time. The oracle — intent — is yours to supply and verify.
-
 ---
 
 ## Exercise 4 — Debug it with the scientific method (~10 min)
@@ -125,11 +112,11 @@ Use the minimal failing example from Exercise 2 as your reproduction. Walk the
 loop: **observe → hypothesize → predict → experiment → fix.**
 
 ```bash
-pytest tests/test_rle.py::test_roundtrip -x --pdb   # reproduce + inspect
+pytest tests/test_rle.py::test_roundtrip -x --pdb
 ```
 
 Trace the *infection chain* backwards from the failure to the defect, fix
-`decode`, then re-run Exercise 2 — green for every generated input.
+`decode`, then re-run Exercise 2
 
 <details>
 <summary>Hint (open only if stuck)</summary>
@@ -147,14 +134,11 @@ characters of the count does `decode` actually read?
 Complete the TODOs so that, on every push and pull request, the workflow
 checks out the code, sets up Python 3.12, installs `requirements.txt`, and
 runs `pytest --cov=src`. Push to GitHub and watch the run under the
-**Actions** tab. Reference: `solutions/ci_solution.yml`.
-
-**Stretch goals:** add a status badge; run a matrix across Python 3.10–3.12;
-fail below a coverage threshold (`--cov-fail-under=80`).
+**Actions** tab.
 
 ---
 
-## Now: your own project (last ~15–20 min)
+## Now: your own project
 
 - Add at least one **meaningful unit test** for a function you wrote — and if
   you draft it with AI, **verify the assertion against your intent**, the way
@@ -173,13 +157,11 @@ Tools you can point at this repo — or your own project — to generate tests:
 | **Pynguin** | search-based (coverage) | `pip install pynguin`; Python's EvoSuite (DynaMOSA) |
 | **Hypothesis ghostwriter** | property-based | `hypothesis write src.cart` drafts property tests |
 | **CoverUp** | AI, coverage-guided | `pip install coverup` (needs an OpenAI/Anthropic key) |
-| **Qodo Cover-Agent** | AI agent (CLI/CI) | open source; generates tests that run and raise coverage |
 | **Copilot / Cursor / Claude** | AI assistant | generate tests inline as you code (Exercise 3) |
 
 Then check whether the generated tests actually *catch bugs*, not just run lines,
 with mutation testing — **mutmut** (`pip install mutmut`) or **Cosmic Ray**.
-This is the lecture's point made concrete: coverage shows what ran; mutation
-score shows what your tests really verify.
+
 
 ## Quick command reference
 
