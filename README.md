@@ -7,7 +7,7 @@ automate everything with GitHub Actions.
 
 ---
 
-## Setup (2 minutes)
+## Setup
 
 ```bash
 python -m venv .venv
@@ -34,7 +34,7 @@ aisd-week10-exercises/
 
 ---
 
-## Exercise 1 — Anatomy of a unit test (~12 min)
+## Exercise 1 — Anatomy of a unit test
 
 **File:** `tests/test_cart.py` · **Target:** `src/cart.py`
 
@@ -53,7 +53,7 @@ pytest --cov=src --cov-report=term-missing
 
 ---
 
-## Exercise 2 — Property-based testing exposes a bug (~12 min)
+## Exercise 2 — Property-based testing exposes a bug
 
 **File:** `tests/test_rle.py` · **Target:** `src/rle.py`
 
@@ -83,7 +83,7 @@ pytest tests/test_rle.py::test_roundtrip -v
 
 ---
 
-## Exercise 3 — Generate tests with AI, then own the oracle (~15 min)
+## Exercise 3 — Generate tests with AI, then own the oracle
 
 **File:** `tests/test_pricing_ai.py` · **Target:** `src/pricing_ai.py`
 
@@ -104,7 +104,7 @@ and an implementation that *almost* matches it.
    ```
 ---
 
-## Exercise 4 — Debug it with the scientific method (~10 min)
+## Exercise 4 — Debug it with the scientific method
 
 **Target:** `src/rle.py`
 
@@ -127,7 +127,7 @@ characters of the count does `decode` actually read?
 
 ---
 
-## Exercise 5 — Automate it with GitHub Actions (~12 min)
+## Exercise 5 — Automate it with GitHub Actions
 
 **File:** `.github/workflows/ci.yml`
 
